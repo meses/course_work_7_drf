@@ -144,3 +144,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+
+# Настройки работы с Telegram
+TELEGRAM_API_TOKEN = '6307501682:AAEKSMtMIT6atfbbBT4SRQBasMpJN_ldtUY'
+USER_TELEGAM_ID = '286345556'
+CHAT_ID = '286345556'
