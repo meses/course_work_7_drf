@@ -10,17 +10,21 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=2_ege84gwe%_l3lxqqthfjwxscm+652!rd+179tr11m)hx6^s'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'course_work_7_drf',
-        'USER': 'postgres',
-        'PASSWORD': 'cnmeses',
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432'
         #superuser: admin | superparol
@@ -149,9 +153,9 @@ REST_FRAMEWORK = {
 }
 
 # Настройки работы с Telegram
-TELEGRAM_API_TOKEN = '6307501682:AAEKSMtMIT6atfbbBT4SRQBasMpJN_ldtUY'
-USER_TELEGAM_ID = '286345556'
-CHAT_ID = '286345556'
+TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
+USER_TELEGAM_ID = os.getenv('USER_TELEGAM_ID')
+CHAT_ID = os.getenv('CHAT_ID')
 
 #Настройка CORS
 CORS_ALLOWED_ORIGINS = [
