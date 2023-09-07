@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'drf_yasg',
+    'django_celery_beat',
 
     'rest_framework',
     'users',
@@ -92,7 +94,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432'
-        #superuser: admin | superparol
+        # superuser: admin | superparol
     }
 }
 
@@ -157,7 +159,7 @@ TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
 USER_TELEGAM_ID = os.getenv('USER_TELEGAM_ID')
 CHAT_ID = os.getenv('CHAT_ID')
 
-#Настройка CORS
+# Настройка CORS
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
 ]
@@ -165,3 +167,26 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
      "http://localhost:8000",
 ]
+
+# URL-адрес брокера сообщений
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+# URL-адрес брокера результатов, также Redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+# Часовой пояс для работы Celery
+CELERY_TIMEZONE = "Europe/Moscow"
+
+# Флаг отслеживания выполнения задач
+CELERY_TASK_TRACK_STARTED = True
+
+# Максимальное время на выполнение задачи
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+# Настройки для Celery
+CELERY_BEAT_SCHEDULE = {
+    'send_telegram_message': {
+        'task': 'main.tasks.send_telegram_message',  # Путь к задаче
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи
+    },
+}
