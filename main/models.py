@@ -4,6 +4,7 @@ from config import settings
 
 NULLABLE = {'blank': True, 'null': True}
 
+
 class Habit(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                              verbose_name='Пользователь')  # создатель привычки

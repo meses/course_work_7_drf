@@ -4,6 +4,7 @@ from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
 
+
 class CustomUserManager(UserManager):
 
     def _create_user(self, email, password, **extra_fields):
@@ -17,6 +18,7 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
+
 
 class User(AbstractUser):
     username = None

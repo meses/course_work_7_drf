@@ -19,9 +19,9 @@ class IsPublicOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
 
         # Разрешить запись только владельцу привычки
-        if obj.public == True:
+        if obj.public is True:
             return True
-        elif obj.public == False and obj.user != request.user:
+        elif obj.public is False and obj.user != request.user:
             return False
         else:
             return False

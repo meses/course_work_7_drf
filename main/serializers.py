@@ -3,6 +3,7 @@ from main.models import Habit
 from main.validators import validate_time_to_complete, validate_related_habit, validate_period
 from users.models import User
 
+
 class HabitSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
     time_to_complete = serializers.IntegerField(validators=[validate_time_to_complete])

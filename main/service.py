@@ -15,6 +15,7 @@ chat_id = settings.CHAT_ID
 #response = requests.get(url, params=params)
 #print(response.json())
 
+
 def send_telegram_message(habit):
     message = f"Ваша привычка: {habit.user.telegram_username}:\nМесто: {habit.place}\nДействие: {habit.action}\nВремя: {habit.time}"
     url = f"https://api.telegram.org/bot{telegram_api_token}/sendMessage"

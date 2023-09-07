@@ -1,11 +1,11 @@
-from django.shortcuts import render
 from django.db.models import Q
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from main.models import Habit
 from main.pagination import MyPagination
 from main.permissions import IsOwnerOrReadOnly, IsPublicOrReadOnly
 from main.serializers import HabitSerializer
+
 
 class HabitCreateAPIView(generics.CreateAPIView):
     serializer_class = HabitSerializer
